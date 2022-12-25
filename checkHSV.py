@@ -1,6 +1,7 @@
+# used to determine proper HSV values of green screen
+
 import cv2 as cv
 import numpy as np
-import os
 
 def zeroPad(num, padding = 4):
     retVal = str(num)
@@ -57,15 +58,18 @@ while True:
         cv.imshow("mask", mask)
         cv.imshow("final", f)
     else:
+        # loops video
         video.set(cv.CAP_PROP_POS_FRAMES, 0)
         continue
 
+    # ESC key
     if cv.waitKey(25) == 27:
         break
 
 video.release()
 cv.destroyAllWindows()
 
+# print final lower and upper HSV values
 print([l_h, l_s, l_v])
 print([u_h, u_s, u_v])
 

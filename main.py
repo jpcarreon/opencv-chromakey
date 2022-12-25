@@ -9,17 +9,21 @@ def zeroPad(num, padding = 4):
     
     return retVal
 
-finalOutput = 1
+# if set to 0, display 640x480 preview of output
+finalOutput = 0
 video = cv.VideoCapture("main.mp4")
 
+# color of green screen in HSV
 l_green = np.array([29, 169, 48])
 u_green = np.array([66, 255, 249])
 
+# determine number of frames to consider
 frameStart = int(os.listdir("./frames/")[0][:4])
 frameEnd = int(os.listdir("./frames/")[-1][:4])
 
 if not os.path.exists("./output/"): os.mkdir("./output")
 
+# chroma key all frames present in ./frames/ folder
 for i in range(frameEnd - frameStart + 1):
     current = frameStart + i
     imageFrame = cv.imread(f"./frames/{zeroPad(current)}.jpeg")
@@ -43,7 +47,7 @@ for i in range(frameEnd - frameStart + 1):
         cv.imshow("mask", f)
     cv.imwrite(f"./output/{zeroPad(i)}.jpg", f)
 
-
+    # ESC key
     if cv.waitKey(25) == 27: break
 
 video.release()
