@@ -10,7 +10,7 @@ def zeroPad(num, padding = 4):
     return retVal
 
 # if set to 0, display 640x480 preview of output
-finalOutput = 0
+finalOutput = 1
 video = cv.VideoCapture("main.mp4")
 
 # color of green screen in HSV
